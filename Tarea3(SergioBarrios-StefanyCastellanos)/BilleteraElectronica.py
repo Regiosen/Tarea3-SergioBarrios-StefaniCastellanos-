@@ -49,12 +49,25 @@ print('heloo')
 if (billetera.Saldo() == 5):
     print('caso 1 Pasado ')
     
-#Caso de Prueba 2 (un credito y un debito)
+#Caso de Prueba 2 (un credito y un debito 7 -5 = 2)
 
 billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
-lista = [Creditos(7)]
+lista2 = [Creditos(7)]
 lista = [Creditos(5)]
 billetera.debitos = lista
+billetera.creditos = lista2
 print('heloo')
 if (billetera.Saldo() == 2):
-    print('caso 1 Pasado ')
+    print('caso 2 Pasado ')
+    
+#Caso de Prueba 2 (un credito y un debito y quedar en 0)
+
+billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
+lista2 = [Creditos(5)]
+lista = [Creditos(5)]
+billetera.debitos = lista
+billetera.creditos = lista2
+print('heloo')
+if (billetera.Saldo() == 0):
+    print('caso 3 Pasado ')
+
