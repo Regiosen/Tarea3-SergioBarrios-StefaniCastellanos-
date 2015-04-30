@@ -2,6 +2,7 @@
 Created on 29/4/2015
 
 @author: Sergio Luis Barrios
+         Stefani Castellanos
 '''
 
 import sys
