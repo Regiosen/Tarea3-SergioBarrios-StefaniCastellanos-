@@ -8,12 +8,16 @@ Created on 29/4/2015
 import sys
 
 class Creditos(object):
-    def __init__(self,mont):
+    def __init__(self,mont,fecha,estab):
         self.monto = mont
+        self.fecha_transaccion = fecha
+        self.id_establecimiento = estab
 
 class Debitos(object):
-    def __init__(self,mont):
-        self.monto = mont        
+    def __init__(self,mont,fecha,estab):
+        self.monto = mont    
+        self.fecha_transaccion = fecha
+        self.id_establecimiento = estab         
 
 class BilleteraElectronica(object):
     '''
@@ -41,3 +45,11 @@ class BilleteraElectronica(object):
         elif (self.saldo >=0):     
             return self.saldo
             
+    def Recargar(self,creditoEntrante):
+        self.creditos.append(creditoEntrante)
+        self.saldo = self.saldo + creditoEntrante.monto
+        
+    def Consumir(self,debitoEntrante):
+        self.debitos.append(debitoEntrante)
+        self.saldo = self.saldo - debitoEntrante.monto
+        
