@@ -49,7 +49,12 @@ class TestcalcularPrecio(unittest.TestCase):
     def testRecargaNoPositiva(self):
         billetera = BilleteraElectronica(3,'Stefani','Castellanos',25385981,1023)
         cred = Creditos(-1,"2/5/2015","USB")
-        self.assertRaises(Exception,billetera.Recargar, cred)
+        self.assertRaises(Exception, billetera.Recargar, cred)
+        
+    def testConsumoNopositivo(self):
+        billetera = BilleteraElectronica(3,'Stefani','Castellanos',25385981,1023)
+        deb = Debitos(-1,"2/5/2015","USB")
+        self.assertRaises(Exception, billetera.Consumir, deb)
         
 if __name__ == "__main__":
     unittest.main()

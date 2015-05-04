@@ -46,6 +46,10 @@ class BilleteraElectronica(object):
         self.saldo = self.saldo + creditoEntrante.monto
         
     def Consumir(self,debitoEntrante):
+        
+        if (debitoEntrante.monto <= 0):
+            raise Exception("No es posible consumir una cantidad no positiva")     
+
         if (self.saldo - debitoEntrante.monto < 0):
             raise Exception("No tiene sufieciente fondos para efectuar la operacion")     
 
