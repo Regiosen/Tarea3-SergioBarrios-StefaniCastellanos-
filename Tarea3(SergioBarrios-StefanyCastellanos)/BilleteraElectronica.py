@@ -6,7 +6,6 @@ Created on 29/4/2015
          Francisco Sucre
 '''
 
-import sys
 # -*- coding: UTF-8 -*-
 
 class Creditos(object):
@@ -37,25 +36,16 @@ class BilleteraElectronica(object):
         self.saldo = 0
         
     def Saldo(self):
-        self.saldo = 0
-        
-        for i in self.creditos:
-            self.saldo = self.saldo + i.monto
-             
-        for j in self.debitos:
-            self.saldo = self.saldo - j.monto
-            
-        if (self.saldo <0):
-            sys.exit ('ERROR: Saldo negativo')
-            
-        elif (self.saldo >=0):     
-            return self.saldo
+        return self.saldo
             
     def Recargar(self,creditoEntrante):
         self.creditos.append(creditoEntrante)
         self.saldo = self.saldo + creditoEntrante.monto
         
     def Consumir(self,debitoEntrante):
+        if (self.saldo - debitoEntrante.monto < 0):
+            raise Exception("No tiene sufieciente fondos para efectuar la operacion")     
+
         self.debitos.append(debitoEntrante)
         self.saldo = self.saldo - debitoEntrante.monto
         
