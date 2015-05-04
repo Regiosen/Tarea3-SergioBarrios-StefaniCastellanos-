@@ -45,6 +45,5 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera.Consumir(consumo_nuevo)
         self.assertEqual(billetera.Saldo(),3,"No funciona consumir credito cuando se tiene suficiente")
 
-        
 if __name__ == "__main__":
     unittest.main()
