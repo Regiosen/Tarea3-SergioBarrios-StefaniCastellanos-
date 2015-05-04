@@ -1,11 +1,10 @@
+# -*- coding: UTF-8 -*-
 '''
 Created on 29/4/2015
 @author: Sergio Luis Barrios
          Stefani Castellanos
          Francisco Sucre
 '''
-
-# -*- coding: UTF-8 -*-
 
 class Creditos(object):
     def __init__(self, monto, fecha_transaccion, id_establecimiento):
@@ -25,11 +24,11 @@ class BilleteraElectronica(object):
     '''
 
     def __init__(self, ID, nombre, apellido, CI, PIN):
-        self.ID = ID
+        self.ID = ID #ID no negativo
         self.nombre = nombre
         self.apellido = apellido
-        self.CI= CI
-        self.PIN = PIN
+        self.CI = CI #CI no negativa
+        self.PIN = PIN 
         self.creditos = []
         self.debitos = []
         self.saldo = 0

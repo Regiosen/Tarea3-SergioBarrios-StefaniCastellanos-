@@ -1,6 +1,7 @@
+# -*- coding: UTF-8 -*-
+
 import unittest
 from BilleteraElectronica import *
-from ubuntu_sso import credentials
 
 class TestcalcularPrecio(unittest.TestCase):
 
@@ -99,6 +100,12 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
         cred = Creditos(False,"25/4/2015","USB")
         self.assertRaises(Exception, billetera.Recargar, cred)      
+    
+    def testNombreCaracteresEspeciales(self):
+        billetera = BilleteraElectronica(1,'Ramón','Nuñez',24101133,8)
+        cred = Creditos(1,"25/4/2015","USB")
+        billetera.Recargar(cred)
+        self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")      
         
 if __name__ == "__main__":
     unittest.main()
