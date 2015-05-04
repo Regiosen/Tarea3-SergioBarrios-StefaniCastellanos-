@@ -49,9 +49,8 @@ class BilleteraElectronica(object):
         
     def Consumir(self,debitoEntrante):
         
-        if (self.saldo -debitoEntrante <0):
-            raiseException("No se admiten tarifas negativas.")
-            
+        if (self.saldo -debitoEntrante.monto <0):
+            raiseException("No tiene suficientes fondos para efectuar la operacion")
         self.debitos.append(debitoEntrante)
         self.saldo = self.saldo - debitoEntrante.monto
         
