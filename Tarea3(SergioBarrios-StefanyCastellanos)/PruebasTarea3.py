@@ -1,5 +1,6 @@
 import unittest
 from BilleteraElectronica import *
+from ubuntu_sso import credentials
 
 class TestcalcularPrecio(unittest.TestCase):
 
@@ -13,16 +14,16 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
         deb = Debitos(5,"2/5/2015","USB")
         cred = Creditos(7,"1/5/2015","USB")
-        billetera.Recargar = cred
-        billetera.Consumir = deb
+        billetera.Recargar(cred)
+        billetera.Consumir(deb)
         self.assertEqual(billetera.Saldo(),2,"No funciona calcular un credito y un debito")
         
     def testUnCreditoUnDebitoResultadoCero(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
         deb = Debitos(2,"1/5/2015","USB")
         cred = Creditos(2,"2/5/2015","USB")
-        billetera.Consumir = deb
-        billetera.Recargar = cred
+        billetera.Recargar(cred)
+        billetera.Consumir(deb)
         self.assertEqual(billetera.Saldo(),0,"No funciona calcular un credito y un debito que dejan en cero el saldo")
         
     def testRecargaUnica(self):
@@ -45,5 +46,10 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera.Consumir(consumo_nuevo)
         self.assertEqual(billetera.Saldo(),3,"No funciona consumir credito cuando se tiene suficiente")
 
+    def testRecargaNoPositiva(self):
+        billetera = BilleteraElectronica(3,'Stefani','Castellanos',25385981,1023)
+        cred = Creditos(-1,"2/5/2015","USB")
+        self.assertRaises(Exception,billetera.Recargar, cred)
+        
 if __name__ == "__main__":
     unittest.main()

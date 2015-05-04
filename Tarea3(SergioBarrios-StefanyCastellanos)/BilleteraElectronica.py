@@ -39,6 +39,9 @@ class BilleteraElectronica(object):
         return self.saldo
             
     def Recargar(self,creditoEntrante):
+        if (creditoEntrante.monto <= 0):
+            raise Exception("No es posible recargar una cantidad no positiva")     
+
         self.creditos.append(creditoEntrante)
         self.saldo = self.saldo + creditoEntrante.monto
         
