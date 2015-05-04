@@ -19,18 +19,18 @@ class TestcalcularPrecio(unittest.TestCase):
         
     def testUnCreditoUnDebitoResultadoCero(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
-        deb = [Debitos(2,"1/5/2015","USB")]
-        cred = [Creditos(2,"2/5/2015","USB")]
-        billetera.debitos = deb
-        billetera.creditos = cred
+        deb = Debitos(2,"1/5/2015","USB")
+        cred = Creditos(2,"2/5/2015","USB")
+        billetera.Recargar(cred)
+        billetera.Consumir(deb)
         self.assertEqual(billetera.Saldo(),0,"No funciona calcular un credito y un debito que dejan en cero el saldo")
         
     def testRecargaUnica(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
-        deb = [Debitos(2,"2/5/2015","USB")]
-        cred = [Creditos(2,"2/5/2015","USB")]
-        billetera.debitos = deb
-        billetera.creditos = cred
+        deb = Debitos(2,"2/5/2015","USB")
+        cred = Creditos(2,"2/5/2015","USB")
+        billetera.Recargar(cred)
+        billetera.Consumir(deb)
         recarga_nueva = Creditos(6,"2/5/2015","USB")
         billetera.Recargar(recarga_nueva)
         self.assertEqual(billetera.Saldo(),6,"No funciona recargar un credito")
@@ -49,6 +49,14 @@ class TestcalcularPrecio(unittest.TestCase):
         consumo_nuevo = Debitos(4,"2/5/2015","USB")
         billetera.Consumir(consumo_nuevo)
         self.assertEqual(billetera.Saldo(),3,"No funciona consumir credito cuando se tiene suficiente")
+        
+    def testMegaRecargaMegaConsumo(self):
+        billetera = BilleteraElectronica(2,'francisco','sucre',19564959,142)
+        deb = Debitos(2^31,"2/5/2015","USB")
+        cred = Creditos((2^31) + 1,"3/5/2015","USB")
+        billetera.Recargar(cred)
+        billetera.Consumir(deb)
+        self.assertEqual(billetera.Saldo(), 1, "Existen Errores con la recarga/consumo grande")
 
 if __name__ == "__main__":
     unittest.main()
