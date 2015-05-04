@@ -7,6 +7,7 @@ Created on 29/4/2015
 '''
 
 import sys
+from twisted.internet._threadedselect import raiseException
 # -*- coding: UTF-8 -*-
 
 class Creditos(object):
@@ -37,16 +38,18 @@ class BilleteraElectronica(object):
         self.saldo = 0
         
     def Saldo(self):
-        self.saldo = 0
         
-        for i in self.creditos:
-            self.saldo = self.saldo + i.monto
-             
-        for j in self.debitos:
-            self.saldo = self.saldo - j.monto
+#         self.saldo = 0
+#         
+#         for i in self.creditos:
+#             self.saldo = self.saldo + i.monto
+#              
+#         for j in self.debitos:
+#             self.saldo = self.saldo - j.monto
             
         if (self.saldo <0):
-            sys.exit ('ERROR: Saldo negativo')
+            raise Exception("No se admiten tarifas negativas.")
+            #sys.exit ('ERROR: Saldo negativo')
             
         elif (self.saldo >=0):     
             return self.saldo
