@@ -106,7 +106,6 @@ class TestcalcularPrecio(unittest.TestCase):
             
     def testNombreCaracteresEspeciales(self):
         billetera = BilleteraElectronica(1024,'Ramón','Nuñez',3981023, "8")
-        print(billetera.PIN)
         cred = Creditos(1,"USB")
         billetera.Recargar(cred)
         self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")      
