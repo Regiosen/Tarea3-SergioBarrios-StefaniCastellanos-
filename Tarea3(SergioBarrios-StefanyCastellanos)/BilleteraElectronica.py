@@ -7,6 +7,7 @@ Created on 29/4/2015
 '''
 
 from decimal import Decimal
+from datetime import datetime
 
 class Creditos(object):
     
@@ -14,6 +15,9 @@ class Creditos(object):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
             raise Exception("Debe ingresar un monto numerico")
+        
+        if not(isinstance(fecha_transaccion, datetime)):
+            raise Exception("Debe ingresar una fecha de tipo datetime")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = fecha_transaccion #cambiarlo a Datetime
@@ -24,6 +28,9 @@ class Debitos(object):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
             raise Exception("Debe ingresar un monto numerico de tipo Decimal")
+        
+        if not(isinstance(fecha_transaccion, datetime)):
+            raise Exception("Debe ingresar una fecha de tipo datetime")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = fecha_transaccion #Cambiarlo a Datetime
