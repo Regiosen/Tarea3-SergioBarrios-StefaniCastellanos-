@@ -53,7 +53,7 @@ class BilleteraElectronica(object):
             raise Exception("No es posible recargar una cantidad no positiva")       
 
         self.creditos.append(creditoEntrante)
-        self.saldo = self.saldo + creditoEntrante.monto
+        self.saldo += creditoEntrante.monto
         
     def Consumir(self,debitoEntrante):
         
@@ -64,4 +64,4 @@ class BilleteraElectronica(object):
             raise Exception("No tiene sufieciente fondos para efectuar la operacion")  
         
         self.debitos.append(debitoEntrante)
-        self.saldo = self.saldo - debitoEntrante.monto
+        self.saldo -= debitoEntrante.monto
