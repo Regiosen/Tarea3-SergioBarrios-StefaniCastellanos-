@@ -109,5 +109,8 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera.Recargar(cred)
         self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")      
         
+    def testNombreCaracteresEspeciales(self):
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','Nuñez',-237920,8)
+        
 if __name__ == "__main__":
     unittest.main()

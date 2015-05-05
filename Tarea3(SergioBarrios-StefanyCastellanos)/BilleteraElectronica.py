@@ -13,7 +13,7 @@ class Creditos(object):
     def __init__(self, monto, fecha_transaccion, id_establecimiento):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
-            raise Exception("Debe ingresar un monto numerico de tipo Decimal")
+            raise Exception("Debe ingresar un monto numerico")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = fecha_transaccion #cambiarlo a Datetime
@@ -30,15 +30,16 @@ class Debitos(object):
         self.id_establecimiento = id_establecimiento
         
 class BilleteraElectronica(object):
-    '''
-    classdocs
-    '''
 
     def __init__(self, ID, nombre, apellido, CI, PIN):
-        self.ID = ID #ID no negativo
+        
+        if (not isinstance(CI, int) or (CI <= 0)):
+            raise Exception("Debe ingresar un monto numerico")
+        
+        self.ID = ID 
         self.nombre = nombre
         self.apellido = apellido
-        self.CI = CI #CI no negativa
+        self.CI = CI 
         self.PIN = PIN 
         self.creditos = []
         self.debitos = []
