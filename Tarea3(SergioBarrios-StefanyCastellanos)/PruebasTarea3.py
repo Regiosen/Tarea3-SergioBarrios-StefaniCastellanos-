@@ -92,17 +92,21 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera.Recargar(cred) 
         self.assertRaises(Exception, billetera.Consumir,deb)
         
-    def testEntradaString(self):
+    def testEntradaStringCred(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133, "8")
         self.assertRaises(Exception, Creditos, "hola", "USB" )
         
-    def testEntradaTrue(self):
+    def testEntradaStringDeb(self):
+        billetera = BilleteraElectronica(1,'sergio','barrios',24101133, "8")
+        self.assertRaises(Exception, Debitos, "hola", "USB" )        
+        
+    def testEntradaBooleanoCreditos(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133, "8")
         self.assertRaises(Exception, Creditos, True, "USB" )
         
-    def testEntradaFalse(self):
+    def testEntradaBooleanoDebitos(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133, "8")
-        self.assertRaises(Exception, Creditos, False,  "USB" )
+        self.assertRaises(Exception, Debitos, True,  "USB" )
             
     def testNombreCaracteresEspeciales(self):
         billetera = BilleteraElectronica(1024,'Ramón','Nuñez',3981023, "8")
@@ -116,7 +120,25 @@ class TestcalcularPrecio(unittest.TestCase):
     def testFechaNoEsDateTime(self):
         self.assertRaises(Exception, Creditos, 1,"kkkaajsjjddff1212j","USB")
         
-    
+    def testBilleteraStringVacio(self):
+        billetera = BilleteraElectronica(1024,'','',3981023, "")
+        cred = Creditos(1,"USB")
+        billetera.Recargar(cred)
+        self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")          
+ 
+    def testCreditoStringVacio(self):
+        billetera = BilleteraElectronica(1024,'Ramón','Nuñez',237920, "8")
+        cred = Creditos(1,"")
+        billetera.Recargar(cred)
+        self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")              
+      
+    def testDebitoStringVacio(self):
+        billetera = BilleteraElectronica(1024,'Ramón','Nuñez',237920, "8")
+        cred = Creditos(1,"")
+        billetera.Recargar(cred)        
+        deb = Debitos(1,"")
+        billetera.Consumir(deb)
+        self.assertEqual(billetera.Saldo(), 0,"No funcionan los caracteres especiales")          
         
 if __name__ == "__main__":
     unittest.main()
