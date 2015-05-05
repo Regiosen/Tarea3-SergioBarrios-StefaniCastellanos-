@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 '''
 Created on 29/4/2015
 @author: Sergio Luis Barrios
@@ -5,37 +6,49 @@ Created on 29/4/2015
          Francisco Sucre
 '''
 
-# -*- coding: UTF-8 -*-
+from decimal import Decimal
+from datetime import datetime
+import hashlib
 
 class Creditos(object):
-    def __init__(self, monto, fecha_transaccion, id_establecimiento):
-        self.monto = monto
-        self.fecha_transaccion = fecha_transaccion
+    
+    def __init__(self, monto, id_establecimiento):
+        
+        if (isinstance(monto, str) or isinstance(monto, bool) ):
+            raise Exception("Debe ingresar un monto numerico")
+        
+        self.monto = Decimal(monto).quantize(Decimal('1.00'))
+        self.fecha_transaccion = datetime.today()
         self.id_establecimiento = id_establecimiento
 
 class Debitos(object):
-    def __init__(self, monto, fecha_transaccion, id_establecimiento):
-        self.monto = monto
-        self.fecha_transaccion = fecha_transaccion
+    def __init__(self, monto, id_establecimiento):
+        
+        if (isinstance(monto, str) or isinstance(monto, bool) ):
+            raise Exception("Debe ingresar un monto numerico de tipo Decimal")
+        
+        self.monto = Decimal(monto).quantize(Decimal('1.00'))
+        self.fecha_transaccion = datetime.today()
         self.id_establecimiento = id_establecimiento
         
 class BilleteraElectronica(object):
-    '''
-    classdocs
-    '''
 
     def __init__(self, ID, nombre, apellido, CI, PIN):
-        self.ID = ID
+        
+        if (not isinstance(CI, int) or (CI <= 0)):
+            raise Exception("Debe ingresar un monto numerico")
+        
+        self.ID = ID 
         self.nombre = nombre
         self.apellido = apellido
-        self.CI= CI
-        self.PIN = PIN
+        self.CI = CI 
+        self.PIN = hashlib.sha512(PIN)
         self.creditos = []
         self.debitos = []
         self.saldo = 0
         
     def Saldo(self):
-        return self.saldo
+        return Decimal(self.saldo).quantize(Decimal('1.00'))
             
     def Recargar(self,creditoEntrante):
         
@@ -43,7 +56,7 @@ class BilleteraElectronica(object):
             raise Exception("No es posible recargar una cantidad no positiva")       
 
         self.creditos.append(creditoEntrante)
-        self.saldo = self.saldo + creditoEntrante.monto
+        self.saldo += creditoEntrante.monto
         
     def Consumir(self,debitoEntrante):
         
@@ -53,11 +66,5 @@ class BilleteraElectronica(object):
         if (self.saldo - debitoEntrante.monto < 0):
             raise Exception("No tiene sufieciente fondos para efectuar la operacion")  
         
-        if (isinstance(debitoEntrante,str)):
-            raise Exception("Debe ingresar un monto numerico")   
-        
-        if (isinstance(debitoEntrante,bool)):
-            raise Exception("Debe ingresar un monto numerico")          
-
         self.debitos.append(debitoEntrante)
-        self.saldo = self.saldo - debitoEntrante.monto
+        self.saldo -= debitoEntrante.monto
