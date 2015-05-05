@@ -124,13 +124,13 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera = BilleteraElectronica(1024,'','',3981023, "")
         cred = Creditos(1,"USB")
         billetera.Recargar(cred)
-        self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")          
+        self.assertEqual(billetera.Saldo(), 1,"Hay un error con entradas de string vacios")      
  
     def testCreditoStringVacio(self):
         billetera = BilleteraElectronica(1024,'Ramón','Nuñez',237920, "8")
         cred = Creditos(1,"")
         billetera.Recargar(cred)
-        self.assertEqual(billetera.Saldo(), 1,"No funcionan los caracteres especiales")              
+        self.assertEqual(billetera.Saldo(), 1,"Hay un error con entradas de string vacios")              
       
     def testDebitoStringVacio(self):
         billetera = BilleteraElectronica(1024,'Ramón','Nuñez',237920, "8")
@@ -138,7 +138,7 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera.Recargar(cred)        
         deb = Debitos(1,"")
         billetera.Consumir(deb)
-        self.assertEqual(billetera.Saldo(), 0,"No funcionan los caracteres especiales")          
+        self.assertEqual(billetera.Saldo(), 0,"Hay un error con entradas de string vacios")          
         
 if __name__ == "__main__":
     unittest.main()
