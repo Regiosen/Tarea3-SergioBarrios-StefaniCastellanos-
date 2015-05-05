@@ -16,7 +16,7 @@ class Creditos(object):
             raise Exception("Debe ingresar un monto numerico de tipo Decimal")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
-        self.fecha_transaccion = fecha_transaccion
+        self.fecha_transaccion = fecha_transaccion #cambiarlo a Datetime
         self.id_establecimiento = id_establecimiento
 
 class Debitos(object):
@@ -26,7 +26,7 @@ class Debitos(object):
             raise Exception("Debe ingresar un monto numerico de tipo Decimal")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
-        self.fecha_transaccion = fecha_transaccion
+        self.fecha_transaccion = fecha_transaccion #Cambiarlo a Datetime
         self.id_establecimiento = id_establecimiento
         
 class BilleteraElectronica(object):
@@ -45,7 +45,7 @@ class BilleteraElectronica(object):
         self.saldo = 0
         
     def Saldo(self):
-        return self.saldo
+        return Decimal(self.saldo).quantize(Decimal('1.00'))
             
     def Recargar(self,creditoEntrante):
         
