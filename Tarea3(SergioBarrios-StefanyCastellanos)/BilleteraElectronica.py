@@ -6,15 +6,26 @@ Created on 29/4/2015
          Francisco Sucre
 '''
 
+from decimal import Decimal
+
 class Creditos(object):
+    
     def __init__(self, monto, fecha_transaccion, id_establecimiento):
-        self.monto = monto
+        
+        if (isinstance(monto, str) or isinstance(monto, bool) ):
+            raise Exception("Debe ingresar un monto numerico de tipo Decimal")
+        
+        self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = fecha_transaccion
         self.id_establecimiento = id_establecimiento
 
 class Debitos(object):
     def __init__(self, monto, fecha_transaccion, id_establecimiento):
-        self.monto = monto
+        
+        if (isinstance(monto, str) or isinstance(monto, bool) ):
+            raise Exception("Debe ingresar un monto numerico de tipo Decimal")
+        
+        self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = fecha_transaccion
         self.id_establecimiento = id_establecimiento
         
@@ -52,11 +63,5 @@ class BilleteraElectronica(object):
         if (self.saldo - debitoEntrante.monto < 0):
             raise Exception("No tiene sufieciente fondos para efectuar la operacion")  
         
-        if (isinstance(debitoEntrante,str)):
-            raise Exception("Debe ingresar un monto numerico")   
-        
-        if (isinstance(debitoEntrante,bool)):
-            raise Exception("Debe ingresar un monto numerico")          
-
         self.debitos.append(debitoEntrante)
         self.saldo = self.saldo - debitoEntrante.monto

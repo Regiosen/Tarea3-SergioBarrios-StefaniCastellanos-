@@ -1,7 +1,13 @@
 # -*- coding: UTF-8 -*-
+'''
+@author: Sergio Luis Barrios
+         Stefani Castellanos
+         Francisco Sucre
+'''
 
 import unittest
 from BilleteraElectronica import *
+from decimal import Decimal
 
 class TestcalcularPrecio(unittest.TestCase):
 
@@ -87,20 +93,16 @@ class TestcalcularPrecio(unittest.TestCase):
         
     def testEntradaString(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
-        cred = Creditos("hola","2/5/2015","USB")
-        self.assertRaises(Exception, billetera.Recargar,cred)
+        self.assertRaises(Exception, Creditos, "hola", "2/5/2015", "USB" )
         
     def testEntradaTrue(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
-        cred = Creditos(True,"25/4/2015","USB")
-        billetera.Recargar(cred)
-        self.assertEqual(billetera.Saldo(),1,"No funciona calcular un solo credito")        
-    
+        self.assertRaises(Exception, Creditos, True, "2/5/2015", "USB" )
+        
     def testEntradaFalse(self):
         billetera = BilleteraElectronica(1,'sergio','barrios',24101133,8)
-        cred = Creditos(False,"25/4/2015","USB")
-        self.assertRaises(Exception, billetera.Recargar, cred)      
-    
+        self.assertRaises(Exception, Creditos, False, "2/5/2015", "USB" )
+            
     def testNombreCaracteresEspeciales(self):
         billetera = BilleteraElectronica(1,'Ramón','Nuñez',24101133,8)
         cred = Creditos(1,"25/4/2015","USB")
