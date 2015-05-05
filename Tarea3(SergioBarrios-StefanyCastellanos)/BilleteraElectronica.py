@@ -8,6 +8,7 @@ Created on 29/4/2015
 
 from decimal import Decimal
 from datetime import datetime
+import hashlib
 
 class Creditos(object):
     
@@ -41,7 +42,7 @@ class BilleteraElectronica(object):
         self.nombre = nombre
         self.apellido = apellido
         self.CI = CI 
-        self.PIN = PIN 
+        self.PIN = hashlib.sha512(PIN)
         self.creditos = []
         self.debitos = []
         self.saldo = 0
