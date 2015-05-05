@@ -11,29 +11,23 @@ from datetime import datetime
 
 class Creditos(object):
     
-    def __init__(self, monto, fecha_transaccion, id_establecimiento):
+    def __init__(self, monto, id_establecimiento):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
             raise Exception("Debe ingresar un monto numerico")
         
-        if not(isinstance(fecha_transaccion, datetime)):
-            raise Exception("Debe ingresar una fecha de tipo datetime")
-        
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
-        self.fecha_transaccion = fecha_transaccion #cambiarlo a Datetime
+        self.fecha_transaccion = datetime.today()
         self.id_establecimiento = id_establecimiento
 
 class Debitos(object):
-    def __init__(self, monto, fecha_transaccion, id_establecimiento):
+    def __init__(self, monto, id_establecimiento):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
             raise Exception("Debe ingresar un monto numerico de tipo Decimal")
         
-        if not(isinstance(fecha_transaccion, datetime)):
-            raise Exception("Debe ingresar una fecha de tipo datetime")
-        
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
-        self.fecha_transaccion = fecha_transaccion #Cambiarlo a Datetime
+        self.fecha_transaccion = datetime.today()
         self.id_establecimiento = id_establecimiento
         
 class BilleteraElectronica(object):
