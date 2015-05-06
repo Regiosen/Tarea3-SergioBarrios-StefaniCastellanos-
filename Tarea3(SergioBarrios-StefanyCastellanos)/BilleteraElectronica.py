@@ -15,7 +15,7 @@ class Creditos(object):
     def __init__(self, monto, id_establecimiento):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
-            raise Exception("Debe ingresar un monto numerico")
+            raise Exception("Debe ingresar un monto numérico")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = datetime.today()
@@ -25,7 +25,7 @@ class Debitos(object):
     def __init__(self, monto, id_establecimiento):
         
         if (isinstance(monto, str) or isinstance(monto, bool) ):
-            raise Exception("Debe ingresar un monto numerico de tipo Decimal")
+            raise Exception("Debe ingresar un monto numérico")
         
         self.monto = Decimal(monto).quantize(Decimal('1.00'))
         self.fecha_transaccion = datetime.today()
@@ -36,7 +36,7 @@ class BilleteraElectronica(object):
     def __init__(self, ID, nombre, apellido, CI, PIN):
         
         if (not isinstance(CI, int) or (CI <= 0)):
-            raise Exception("Debe ingresar un monto numerico")
+            raise Exception("La cedula suministrada nos es válida")
         
         self.ID = ID 
         self.nombre = nombre
@@ -64,7 +64,7 @@ class BilleteraElectronica(object):
             raise Exception("No es posible consumir una cantidad no positiva")     
 
         if (self.saldo - debitoEntrante.monto < 0):
-            raise Exception("No tiene sufieciente fondos para efectuar la operacion")  
+            raise Exception("No tiene sufieciente fondos para efectuar la operación")  
         
         self.debitos.append(debitoEntrante)
         self.saldo -= debitoEntrante.monto
