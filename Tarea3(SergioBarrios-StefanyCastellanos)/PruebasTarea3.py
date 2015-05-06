@@ -139,5 +139,11 @@ class TestcalcularPrecio(unittest.TestCase):
         billetera.Consumir(deb, "8")
         self.assertEqual(billetera.Saldo(), 0,"Hay un error con entradas de string vacios")
 
+    def testPINIncorrecto(self):
+        billetera = BilleteraElectronica(1024,'Fallo','Oh no!',3981023, "1024")
+        cred = Creditos(10.01,"USB")
+        deb = Debitos(2.99, "USB")
+        self.assertRaises(Exception, billetera.Consumir, deb, "2" )
+    
 if __name__ == "__main__":
     unittest.main()
