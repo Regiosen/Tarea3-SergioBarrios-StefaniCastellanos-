@@ -2,7 +2,7 @@
 '''
 @author: Sergio Luis Barrios
     Stefani Castellanos
-    Francisco Sucre
+    Francisco Sucre 
 '''
 import unittest
 from BilleteraElectronica import *

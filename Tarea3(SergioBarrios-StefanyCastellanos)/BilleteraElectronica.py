@@ -61,6 +61,7 @@ class BilleteraElectronica(object):
     def Consumir(self,debitoEntrante, PIN):
         
         PINcript = hashlib.sha512(PIN)
+        
         if (debitoEntrante.monto <= 0):
             raise Exception("No es posible consumir una cantidad no positiva")     
 
