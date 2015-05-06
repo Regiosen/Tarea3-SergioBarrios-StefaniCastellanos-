@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 '''
 @author: Sergio Luis Barrios
-Stefani Castellanos
-Francisco Sucre
+    Stefani Castellanos
+    Francisco Sucre
 '''
 import unittest
 from BilleteraElectronica import *
