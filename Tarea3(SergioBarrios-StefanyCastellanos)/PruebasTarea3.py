@@ -144,6 +144,8 @@ class TestcalcularPrecio(unittest.TestCase):
         cred = Creditos(10.01,"USB")
         deb = Debitos(2.99, "USB")
         self.assertRaises(Exception, billetera.Consumir, deb, "2" )
+
+        
     
 if __name__ == "__main__":
     unittest.main()

@@ -42,7 +42,7 @@ class BilleteraElectronica(object):
         self.nombre = nombre
         self.apellido = apellido
         self.CI = CI 
-        self.PIN = hashlib.sha512(PIN)
+        self.PIN = hashlib.sha512(PIN.encode()).hexdigest()
         self.creditos = []
         self.debitos = []
         self.saldo = 0
@@ -59,16 +59,14 @@ class BilleteraElectronica(object):
         self.saldo += creditoEntrante.monto
         
     def Consumir(self,debitoEntrante, PIN):
-        
-        PINcript = hashlib.sha512(PIN)
-        
+                
         if (debitoEntrante.monto <= 0):
             raise Exception("No es posible consumir una cantidad no positiva")     
 
         if (self.saldo - debitoEntrante.monto < 0):
             raise Exception("No tiene suficiente fondos para efectuar la operación")  
         
-        if (self.PIN.digest() != PINcript.digest()):
+        if (self.PIN != hashlib.sha512(PIN.encode()).hexdigest()):
             raise Exception("El PIN suministrado es incorrecto, operación cancelada")
         
         self.debitos.append(debitoEntrante)
