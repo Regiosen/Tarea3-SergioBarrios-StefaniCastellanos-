@@ -205,12 +205,12 @@ class TestcalcularPrecio(unittest.TestCase):
     #Malicia
         
     def testCedulaNone(self):
-        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','',None, "12")
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','Ñuñez',None, "12")
         
     #Malicia
         
     def testPinNone(self):
-        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','',2334445, None)
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','Ñuñez',2334445, None)
         
 if __name__ == "__main__":
     unittest.main()
