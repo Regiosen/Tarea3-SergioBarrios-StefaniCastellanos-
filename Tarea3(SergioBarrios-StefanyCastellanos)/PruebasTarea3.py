@@ -201,6 +201,16 @@ class TestcalcularPrecio(unittest.TestCase):
         
     def testApellidoVacio(self):
         self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','',237920, "12")
+    
+    #Malicia
+        
+    def testCedulaNone(self):
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','',None, "12")
+        
+    #Malicia
+        
+    def testPinNone(self):
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','',2334445, None)
         
 if __name__ == "__main__":
     unittest.main()

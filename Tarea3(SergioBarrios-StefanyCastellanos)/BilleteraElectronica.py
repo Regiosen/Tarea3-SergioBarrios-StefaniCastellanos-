@@ -35,13 +35,13 @@ class BilleteraElectronica(object):
 
     def __init__(self, ID, nombre, apellido, CI, PIN):
         
-        if (not isinstance(CI, int) or (CI <= 0)):
+        if (not isinstance(CI, int) or (CI <= 0) or CI == None):
             raise Exception("La cedula suministrada nos es válida")
         
-        if (PIN == ""):
+        if (PIN == "") or None:
             raise Exception("El pin no puede ser vacio")
         
-        if (nombre == "") or (apellido == "") :
+        if (nombre == "") or (apellido == "") or None :
             raise Exception("La cuenta no puede tener apellidos ni nombres vacios")
         
         self.ID = ID 
