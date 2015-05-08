@@ -38,6 +38,12 @@ class BilleteraElectronica(object):
         if (not isinstance(CI, int) or (CI <= 0)):
             raise Exception("La cedula suministrada nos es válida")
         
+        if (PIN == ""):
+            raise Exception("El pin no puede ser vacio")
+        
+        if (nombre == "") or (apellido == "") :
+            raise Exception("La cuenta no puede tener apellidos ni nombres vacios")
+        
         self.ID = ID 
         self.nombre = nombre
         self.apellido = apellido

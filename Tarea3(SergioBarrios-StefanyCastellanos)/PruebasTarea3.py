@@ -158,12 +158,10 @@ class TestcalcularPrecio(unittest.TestCase):
     #frontera y esquina
         
     def testBilleteraStringsVacios(self):
-        billetera = BilleteraElectronica(1024,'','',3981023, "")
-        cred = Creditos(1,"USB")
-        billetera.Recargar(cred)
-        self.assertEqual(billetera.Saldo(), 1,"Hay un error con entradas de string vacios")
+        self.assertRaises(Exception, BilleteraElectronica, 1,'','',237920, "")
         
     #frontera
+    #se asume que se pueden hacer transacciones de establecimientos que no tiene id aun
 
     def testCreditoStringVacio(self):
         billetera = BilleteraElectronica(1024,'Ramón','Nuñez',237920, "8")
@@ -189,6 +187,20 @@ class TestcalcularPrecio(unittest.TestCase):
         deb = Debitos(2.99, "USB")
         self.assertRaises(Exception, billetera.Consumir, deb, "2" )
         
+    #Malicia
+        
+    def testPINVacio(self):
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','Nuñez',237920, "")
+        
+    #Malicia
     
+    def testNombreVacio(self):
+        self.assertRaises(Exception, BilleteraElectronica, 1,'','Nuñez',237920, "33")
+        
+    #Malicia
+        
+    def testApellidoVacio(self):
+        self.assertRaises(Exception, BilleteraElectronica, 1,'Ramón','',237920, "12")
+        
 if __name__ == "__main__":
     unittest.main()
